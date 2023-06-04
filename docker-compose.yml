@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  contenedoresdocker-backend:
+    container_name: contenedoresdocker-backend-micro
+    image: contenedoresdocker-backend:v1
+    build:
+      context: .
+    ports:
+      - "4002:4002"
+      -  "4003:4002"  
+    networks:
+      - contenedoresdocker-app
+  balanceador-carga:
+    container_name: balanceador-carga
+    image: balanceador-carga:v1
+    build: 
+       context:  ./balanceador
+    ports:
+    - "4004:4002"
+    networks:
+    - contenedoresdocker-app
+
+networks:
+    contenedoresdocker-app:
+
